@@ -21,7 +21,7 @@ namespace postcard.Controllers
 
         public List<string> getstorageconnectionstring(IConfiguration configuration)
         {            
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:AzureBlobStorageConnection");
+            var connectionString = configuration.GetValue<string>("ConnectionStrings:SQLDatabaseConnection");
             var BucketName = configuration.GetValue<string>("StorageS3:BucketName");
             var AwsAccessKey = configuration.GetValue<string>("StorageS3:AwsAccessKey");
             var AwsSecretAccessKey = configuration.GetValue<string>("StorageS3:AwsSecretAccessKey");

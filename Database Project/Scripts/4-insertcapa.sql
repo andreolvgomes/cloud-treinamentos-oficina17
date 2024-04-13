@@ -1,3 +1,6 @@
+use postcard
+go
+
 INSERT INTO capas (uf, estado, musica, youtube, imagem)
 VALUES ('SP', 'São Paulo', 'Não posso ficar Nem mais um minuto com você Sinto muito, amor Mas não pode ser Moro em Jaçanã...', 'https://www.youtube.com/watch?v=XoUtxWU8lW8', 'capa-sp.jpeg');
 
