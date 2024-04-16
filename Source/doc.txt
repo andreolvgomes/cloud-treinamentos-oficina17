@@ -1,0 +1,22 @@
+1-instalar na máquina
+https://download.visualstudio.microsoft.com/download/pr/8091a826-e1c4-424a-b17b-5c10776cd3de/8957f21a279322d8fac9b542c6aba12e/dotnet-sdk-7.0.408-win-x64.exe
+
+2-definir connectionsTring
+server=DESKTOP-9VHU1P1;database=postcard;user id=sa;pwd=123456;Encrypt=False
+
+3-jogar no bucket as imagens
+	/images*
+	
+--- rds
+oficina17
+admin
+a6sd4f6as4d6a5sdcf15
+
+--- docker
+docker build -t oficina17 .
+docker run -d -p 8080:80 --name oficina17 oficina17
+
+database-oficina17
+admin
+$Aws$RdsOficina
+database-oficina17.cxkcwsq22dbq.us-east-1.rds.amazonaws.com,1433
