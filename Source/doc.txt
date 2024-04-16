@@ -20,3 +20,13 @@ database-oficina17
 admin
 $Aws$RdsOficina
 database-oficina17.cxkcwsq22dbq.us-east-1.rds.amazonaws.com,1433
+
+--Program.cs
+XML encryptor configured. Key {80435ee6-52e1-4fe3-81db-837ad268fc48} may be persisted to storage in unencrypted form.
+
+builder.Services.AddDataProtection().UseCryptographicAlgorithms(
+    new AuthenticatedEncryptorConfiguration
+    {
+        EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+        ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+    });
