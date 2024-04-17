@@ -30,6 +30,7 @@ public class HomeController : Controller
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
                 model.hostip = ip.ToString();
+                break;
             }
         }
         
