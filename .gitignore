@@ -1,2 +1,5 @@
-
+appsettings.json
+appsettings.Development.json
 .vs
+/02.source/postcard/appsettings.Development.json
+/02.source/postcard/appsettings.json
