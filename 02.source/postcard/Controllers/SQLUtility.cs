@@ -28,7 +28,7 @@ namespace postcard.Controllers
                 Name = "SQLDatabaseConnection"
             };
             var value = await client.GetParameterAsync(request);
-            var cnn = value.Parameter.Value;
+            return value.Parameter.Value;
 #endif
         }
 
