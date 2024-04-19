@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{0ADE24B0-A116-4EC0-B0FE-262C57060EB9}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="postcard/Models/Capas.cs">
+    <Files>
+      <File FileName="Dockerfile" />
+      <File FileName="postcard/appsettings.json" Line="19" Column="1" />
+      <File FileName="postcard/Controllers/StorageUtility.cs" Line="93" Column="1" />
+      <File FileName="postcard/Views/Home/_Capas.cshtml" Line="10" Column="58" />
+      <File FileName="postcard/Views/Shared/_Layout.cshtml" Line="24" Column="30" />
+      <File FileName="postcard/Models/Capas.cs" Line="9" Column="23" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="postcard" expanded="True">
+            <Node name="postcard" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Capas.cs" selected="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.postcard PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

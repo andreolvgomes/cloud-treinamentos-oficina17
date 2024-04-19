@@ -7,40 +7,54 @@ using postcard.Models;
 using Microsoft.Data.SqlClient;
 using static System.Reflection.Metadata.BlobBuilder;
 using System.Reflection.Metadata;
+using Amazon.SimpleSystemsManagement;
+using Amazon.SimpleSystemsManagement.Model;
+using Amazon.Runtime;
 
 namespace postcard.Controllers
 {
-	public class SQLUtility
-	{
-        public string getconnectionstring(IConfiguration configuration)
+    public class SQLUtility
+    {
+        public async Task<string> getconnectionstring(IConfiguration configuration)
         {
+            // TODO; mudanças aqui
+#if DEBUG
             var connectionString = configuration.GetValue<string>("ConnectionStrings:SQLDatabaseConnection");
             return connectionString;
+#else
+            var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
+            var request = new GetParameterRequest()
+            {
+                Name = "SQLDatabaseConnection"
+            };
+            var value = await client.GetParameterAsync(request);
+            var cnn = value.Parameter.Value;
+#endif
         }
 
-		public async Task<List<Capas>> getcapas(string query, IConfiguration configuration)
+        public async Task<List<Capas>> getcapas(string query, IConfiguration configuration)
         {
-            var capas = new List<Capas>();			
+            var capas = new List<Capas>();
 
-			try
-			{
+            try
+            {
 
                 // Get Blobs in Azure Container Blob
                 var blobs = new List<BlobContainer>();
                 blobs = await new StorageUtility().getstorage(configuration);
 
-                using (SqlConnection con = new SqlConnection(getconnectionstring(configuration)))
-				{
-					con.Open();
-					SqlCommand cmd = new SqlCommand(query);
-					cmd.Connection = con;
+                using (SqlConnection con = new SqlConnection(await getconnectionstring(configuration)))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(query);
+                    cmd.Connection = con;
 
-					SqlDataReader rdr = cmd.ExecuteReader();
-					while (rdr.Read())
-					{
-						Capas capa = new Capas();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        Capas capa = new Capas();
 
-						capa.id = Convert.ToInt32(rdr["id"]);
+                        capa.id = Convert.ToInt32(rdr["id"]);
                         capa.uf = rdr["uf"].ToString();
                         capa.estado = rdr["estado"].ToString();
                         capa.musica = rdr["musica"].ToString();
@@ -48,28 +62,28 @@ namespace postcard.Controllers
                         capa.imagem = rdr["imagem"].ToString();
 
 
-                       //Compare blobs
-                       foreach (BlobContainer blob in blobs)
-                       {
+                        //Compare blobs
+                        foreach (BlobContainer blob in blobs)
+                        {
                             if (blob.name == capa.imagem)
                             {
                                 capa.URLimg = blob.URL;
                             }
-                       }
+                        }
 
-						capas.Add(capa);
+                        capas.Add(capa);
                     }
-				}
-			}
-			catch (SqlException ex)
-			{
-				throw ex;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
             }
             return (capas);
-		}
+        }
 
-		public async Task<List<PostCards>> getcards(string query, IConfiguration configuration)
-		{
+        public async Task<List<PostCards>> getcards(string query, IConfiguration configuration)
+        {
             var cards = new List<PostCards>();
 
             try
@@ -78,7 +92,7 @@ namespace postcard.Controllers
                 var blobs = new List<BlobContainer>();
                 blobs = await new StorageUtility().getstorage(configuration);
 
-                using (SqlConnection con = new SqlConnection(getconnectionstring(configuration)))
+                using (SqlConnection con = new SqlConnection(await getconnectionstring(configuration)))
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand(query);
@@ -118,6 +132,6 @@ namespace postcard.Controllers
             }
             return (cards);
         }
-	}
+    }
 }
 

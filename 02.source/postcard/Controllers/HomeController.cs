@@ -24,13 +24,12 @@ public class HomeController : Controller
         var model = new Home();
         var modelcapa = new List<Capas>();
         var hostname = Dns.GetHostEntry(Dns.GetHostName());
-
+        
         foreach (var ip in hostname.AddressList)
         {
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
                 model.hostip = ip.ToString();
-                break;
             }
         }
         

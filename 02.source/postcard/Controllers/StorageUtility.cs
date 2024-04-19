@@ -12,16 +12,18 @@ using Amazon;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using System.Net;
+using Amazon.SimpleSystemsManagement;
+using Amazon.SimpleSystemsManagement.Model;
 
 namespace postcard.Controllers
 {
-	public class StorageUtility
-	{
+    public class StorageUtility
+    {
         static IAmazonS3 awsS3Client;
 
-        public List<string> getstorageconnectionstring(IConfiguration configuration)
-        {            
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:SQLDatabaseConnection");
+        public async Task<List<string>> getstorageconnectionstring(IConfiguration configuration)
+        {
+            var connectionString = configuration.GetValue<string>("ConnectionStrings:AzureBlobStorageConnection");
             var BucketName = configuration.GetValue<string>("StorageS3:BucketName");
             var AwsAccessKey = configuration.GetValue<string>("StorageS3:AwsAccessKey");
             var AwsSecretAccessKey = configuration.GetValue<string>("StorageS3:AwsSecretAccessKey");
@@ -33,7 +35,6 @@ namespace postcard.Controllers
             storageparams.Add(AwsAccessKey);
             storageparams.Add(AwsSecretAccessKey);
 
-
             return storageparams;
         }
 
@@ -41,13 +42,17 @@ namespace postcard.Controllers
         {
             try
             {
-                var storageparams = getstorageconnectionstring(configuration);
+                var storageparams = await getstorageconnectionstring(configuration);
 
+#if DEBUG
                 awsS3Client = new AmazonS3Client(storageparams[2].ToString(), storageparams[3].ToString(), RegionEndpoint.USEast1);
+#else
+                awsS3Client = new AmazonS3Client(RegionEndpoint.USEast1);
+#endif
 
                 var container = new List<BlobContainer>();
 
-               // var objetct = await awsS3Client.ListObjectsAsync(storageparams[1].ToString());
+                // var objetct = await awsS3Client.ListObjectsAsync(storageparams[1].ToString());
 
                 ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request();
                 listObjectsRequest.BucketName = storageparams[1].ToString();
@@ -67,16 +72,16 @@ namespace postcard.Controllers
                         };
 
                         var S3URL = awsS3Client.GetPreSignedURL(request);
-                        
-                        container.Add(new BlobContainer { name = s3Object.Key, URL = S3URL});
+
+                        container.Add(new BlobContainer { name = s3Object.Key, URL = S3URL });
                     }
                 }
                 while (listObjectsResponse.IsTruncated);
-               
+
 
                 return container;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -88,8 +93,12 @@ namespace postcard.Controllers
 
             try
             {
-                var storageparams = getstorageconnectionstring(configuration);
+                var storageparams = await getstorageconnectionstring(configuration);
+#if DEBUG
                 awsS3Client = new AmazonS3Client(storageparams[2].ToString(), storageparams[3].ToString(), RegionEndpoint.USEast1);
+#else
+                awsS3Client = new AmazonS3Client(RegionEndpoint.USEast1);
+#endif
 
                 GetObjectRequest getObjectRequest = new GetObjectRequest
                 {
@@ -101,7 +110,7 @@ namespace postcard.Controllers
                 {
                     if (response.HttpStatusCode == HttpStatusCode.OK)
                     {
-                        using(ms = new MemoryStream())
+                        using (ms = new MemoryStream())
                         {
                             await response.ResponseStream.CopyToAsync(ms);
                         }
