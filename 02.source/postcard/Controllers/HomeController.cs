@@ -32,7 +32,7 @@ public class HomeController : Controller
                 model.hostip = ip.ToString();
             }
         }
-        
+        model.hostip += "\n" + Guid.NewGuid();
         modelcapa = await new SQLUtility().getcapas("SELECT Id, uf, estado, musica, youtube, imagem FROM capas", _configuration);
 
         model.listcapas = modelcapa;
