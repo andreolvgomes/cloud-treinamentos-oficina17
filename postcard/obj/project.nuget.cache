@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AFEMCd6akS5IHi6qZSbK2VBuybupYF+7yBaeGPXk5EnMkr9lY9XZ6M7swldgUodZkGv2zukYTkvAUMM/XhuFgw==",
+  "dgSpecHash": "Edf4O+rrH0k1rb9WgaN/lskgFTHka4fqyajVFjCnpGHk6Id/pdxGFo99ciDEwMKrxzPMISzsiamAb6ZBX7LFIA==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\cloud-treinamentos-oficina17\\02.source\\postcard\\postcard.csproj",
+  "projectFilePath": "C:\\Projects\\cloud-treinamentos-oficina17\\postcard\\postcard.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\André\\.nuget\\packages\\awssdk.core\\3.7.303.17\\awssdk.core.3.7.303.17.nupkg.sha512",
     "C:\\Users\\André\\.nuget\\packages\\awssdk.s3\\3.7.103.50\\awssdk.s3.3.7.103.50.nupkg.sha512",

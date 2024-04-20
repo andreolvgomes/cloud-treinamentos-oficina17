@@ -18,18 +18,9 @@ namespace postcard.Controllers
         public async Task<string> getconnectionstring(IConfiguration configuration)
         {
             // TODO; mudanças aqui
-#if DEBUG
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:SQLDatabaseConnection");
-            return connectionString;
-#else
-            var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
-            var request = new GetParameterRequest()
-            {
-                Name = "SQLDatabaseConnection"
-            };
-            var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#endif
+            return await AwsParameterStorage.getconnectionstring(configuration);
+            //var connectionString = configuration.GetValue<string>("ConnectionStrings:SQLDatabaseConnection");
+            //return connectionString;
         }
 
         public async Task<List<Capas>> getcapas(string query, IConfiguration configuration)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\cloud-treinamentos-oficina17\\02.source\\postcard\\postcard.csproj": {}
+    "C:\\Projects\\cloud-treinamentos-oficina17\\postcard\\postcard.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\cloud-treinamentos-oficina17\\02.source\\postcard\\postcard.csproj": {
+    "C:\\Projects\\cloud-treinamentos-oficina17\\postcard\\postcard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\cloud-treinamentos-oficina17\\02.source\\postcard\\postcard.csproj",
+        "projectUniqueName": "C:\\Projects\\cloud-treinamentos-oficina17\\postcard\\postcard.csproj",
         "projectName": "postcard",
-        "projectPath": "C:\\Projects\\cloud-treinamentos-oficina17\\02.source\\postcard\\postcard.csproj",
+        "projectPath": "C:\\Projects\\cloud-treinamentos-oficina17\\postcard\\postcard.csproj",
         "packagesPath": "C:\\Users\\André\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\cloud-treinamentos-oficina17\\02.source\\postcard\\obj\\",
+        "outputPath": "C:\\Projects\\cloud-treinamentos-oficina17\\postcard\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\André\\AppData\\Roaming\\NuGet\\NuGet.Config",

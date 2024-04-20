@@ -21,34 +21,31 @@ namespace postcard.Controllers
     {
         static IAmazonS3 awsS3Client;
 
-        public async Task<List<string>> getstorageconnectionstring(IConfiguration configuration)
-        {
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:AzureBlobStorageConnection");
-            var BucketName = configuration.GetValue<string>("StorageS3:BucketName");
-            var AwsAccessKey = configuration.GetValue<string>("StorageS3:AwsAccessKey");
-            var AwsSecretAccessKey = configuration.GetValue<string>("StorageS3:AwsSecretAccessKey");
+        // TODO: mudanças aqui para capturar os parâmetros do Aws Parater Storage
+        //public async Task<List<string>> getstorageconnectionstring(IConfiguration configuration)
+        //{
+        //    var connectionString = configuration.GetValue<string>("ConnectionStrings:AzureBlobStorageConnection");
+        //    var BucketName = configuration.GetValue<string>("StorageS3:BucketName");
+        //    var AwsAccessKey = configuration.GetValue<string>("StorageS3:AwsAccessKey");
+        //    var AwsSecretAccessKey = configuration.GetValue<string>("StorageS3:AwsSecretAccessKey");
 
-            var storageparams = new List<string>();
+        //    var storageparams = new List<string>();
 
-            storageparams.Add(connectionString);
-            storageparams.Add(BucketName);
-            storageparams.Add(AwsAccessKey);
-            storageparams.Add(AwsSecretAccessKey);
+        //    storageparams.Add(connectionString);
+        //    storageparams.Add(BucketName);
+        //    storageparams.Add(AwsAccessKey);
+        //    storageparams.Add(AwsSecretAccessKey);
 
-            return storageparams;
-        }
+        //    return storageparams;
+        //}
 
         public async Task<List<BlobContainer>> getstorage(IConfiguration configuration)
         {
             try
             {
-                var storageparams = await getstorageconnectionstring(configuration);
-
-#if DEBUG
+                //var storageparams = await getstorageconnectionstring(configuration);
+                var storageparams = await AwsParameterStorage.getstorageconnectionstring(configuration);
                 awsS3Client = new AmazonS3Client(storageparams[2].ToString(), storageparams[3].ToString(), RegionEndpoint.USEast1);
-#else
-                awsS3Client = new AmazonS3Client(RegionEndpoint.USEast1);
-#endif
 
                 var container = new List<BlobContainer>();
 
@@ -93,12 +90,8 @@ namespace postcard.Controllers
 
             try
             {
-                var storageparams = await getstorageconnectionstring(configuration);
-#if DEBUG
+                var storageparams = await AwsParameterStorage.getstorageconnectionstring(configuration);
                 awsS3Client = new AmazonS3Client(storageparams[2].ToString(), storageparams[3].ToString(), RegionEndpoint.USEast1);
-#else
-                awsS3Client = new AmazonS3Client(RegionEndpoint.USEast1);
-#endif
 
                 GetObjectRequest getObjectRequest = new GetObjectRequest
                 {
