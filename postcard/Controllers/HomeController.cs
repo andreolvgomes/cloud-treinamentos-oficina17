@@ -34,7 +34,7 @@ public class HomeController : Controller
             }
         }
         if (string.IsNullOrEmpty(idInstance))
-            idInstance = Guid.NewGuid().ToString();
+            idInstance = Guid.NewGuid().ToString().Split('-')[0];
         model.hostip += $" ({idInstance})";
         modelcapa = await new SQLUtility().getcapas("SELECT Id, uf, estado, musica, youtube, imagem FROM capas", _configuration);
 
