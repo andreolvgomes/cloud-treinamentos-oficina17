@@ -52,6 +52,7 @@ namespace postcard.Controllers
 
         public static async Task<string> AwsAccessKey(IConfiguration configuration)
         {
+            return "AKIAWSULGMZ6PC2TADEL";
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
             {
