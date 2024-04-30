@@ -30,6 +30,7 @@ namespace postcard.Controllers
 
         public static async Task<string> BucketName(IConfiguration configuration)
         {
+            return "grupo-2-oficina17";
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
             {
