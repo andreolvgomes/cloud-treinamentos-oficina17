@@ -27,6 +27,23 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+// Adicione uma rota para o arquivo de verificação do Loader.io
+app.Map("/loaderio-647e4423f6745ebf1a2b4c020c847f74", builder =>
+{
+    builder.Run(async context =>
+    {
+        var filePath = Path.Combine("loaderio-647e4423f6745ebf1a2b4c020c847f74.txt");
+        if (File.Exists(filePath))
+        {
+            await context.Response.SendFileAsync(filePath);
+        }
+        else
+        {
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+        }
+    });
+});
+
 app.UseRouting();
 
 app.UseAuthorization();
