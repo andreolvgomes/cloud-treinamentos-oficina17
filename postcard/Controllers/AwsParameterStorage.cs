@@ -7,6 +7,7 @@ namespace postcard.Controllers
     {
         public static async Task<string> getconnectionstring(IConfiguration configuration)
         {
+            return "server=oficina17.cxkcwsq22dbq.us-east-1.rds.amazonaws.com;database=oficina17;user id=admin;pwd=$dDAd455%d5a4df5;TrustServerCertificate=true";
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
             {
