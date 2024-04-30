@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("postcard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed121bc88bea97a05206cf1e10bc30892cf53a06")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e97ab6f7f6a8325ec1da842acf1042b471e1840")]
 [assembly: System.Reflection.AssemblyProductAttribute("postcard")]
 [assembly: System.Reflection.AssemblyTitleAttribute("postcard")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -5,34 +5,33 @@ namespace postcard.Controllers
 {
     public class AwsParameterStorage
     {
+        private static string _connectionString = "";
+        private static string _bucketname = "";
+        private static string _awsAccessKey = "";
+        private static string _awsSecretAccessKey = "";
+
         public static async Task<string> getconnectionstring(IConfiguration configuration)
         {
-            return "server=oficina17.cxkcwsq22dbq.us-east-1.rds.amazonaws.com;database=oficina17;user id=admin;pwd=$dDAd455%d5a4df5;TrustServerCertificate=true";
+            if (!string.IsNullOrEmpty(_connectionString))
+                return _connectionString;
 
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
             {
                 Name = "SQLDatabaseConnection"
             };
+
             var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#if DEBUG
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:SQLDatabaseConnection");
-            return connectionString;
-#else
-            var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
-            var request = new GetParameterRequest()
-            {
-                Name = "SQLDatabaseConnection"
-            };
-            var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#endif
+
+            _connectionString = value.Parameter.Value;
+            return _connectionString;
+            //return configuration.GetValue<string>("ConnectionStrings:SQLDatabaseConnection");
         }
 
         public static async Task<string> BucketName(IConfiguration configuration)
         {
-            return "grupo-2-oficina17";
+            if (!string.IsNullOrEmpty(_bucketname))
+                return _bucketname;
 
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
@@ -40,23 +39,16 @@ namespace postcard.Controllers
                 Name = "BucketName"
             };
             var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#if DEBUG
-            return configuration.GetValue<string>("StorageS3:BucketName");
-#else
-            var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
-            var request = new GetParameterRequest()
-            {
-                Name = "BucketName"
-            };
-            var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#endif
+            _bucketname = value.Parameter.Value;
+
+            return _bucketname;
+            //return configuration.GetValue<string>("StorageS3:BucketName");
         }
 
         public static async Task<string> AwsAccessKey(IConfiguration configuration)
         {
-            return "AKIAWSULGMZ6PC2TADEL";
+            if (!string.IsNullOrEmpty(_awsAccessKey))
+                return _awsAccessKey;
 
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
@@ -64,23 +56,16 @@ namespace postcard.Controllers
                 Name = "AccessKey"
             };
             var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#if DEBUG
-            return configuration.GetValue<string>("StorageS3:AwsAccessKey");
-#else
-            var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
-            var request = new GetParameterRequest()
-            {
-                Name = "AccessKey"
-            };
-            var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#endif
+            _awsAccessKey = value.Parameter.Value;
+
+            return _awsAccessKey;
+            //return configuration.GetValue<string>("StorageS3:AwsAccessKey");
         }
 
         public static async Task<string> AwsSecretAccessKey(IConfiguration configuration)
         {
-            return "7/Ayc3F5j14Gdw6N8zvqTtToPkwpLR/Oslgu4l6A";
+            if (!string.IsNullOrEmpty(_awsSecretAccessKey))
+                return _awsSecretAccessKey;
 
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
@@ -88,18 +73,10 @@ namespace postcard.Controllers
                 Name = "SecretAccessKey"
             };
             var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#if DEBUG
-            return configuration.GetValue<string>("StorageS3:AwsSecretAccessKey");
-#else
-            var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
-            var request = new GetParameterRequest()
-            {
-                Name = "SecretAccessKey"
-            };
-            var value = await client.GetParameterAsync(request);
-            return value.Parameter.Value;
-#endif
+            _awsSecretAccessKey = value.Parameter.Value;
+            return _awsSecretAccessKey;
+
+            //return configuration.GetValue<string>("StorageS3:AwsSecretAccessKey");
         }
 
         public static async Task<List<string>> getstorageconnectionstring(IConfiguration configuration)
