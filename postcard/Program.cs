@@ -44,6 +44,15 @@ app.Map("/loaderio-d6290e01b034208f5b307489d50a1820", builder =>
     });
 });
 
+app.Map("/loaderio-008b9c1488999416c68670a184ecd0b8", builder =>
+{
+    builder.Run(async context =>
+    {
+        context.Response.ContentType = "text/plain; charset=utf-8";
+        await context.Response.WriteAsync("loaderio-008b9c1488999416c68670a184ecd0b8");
+    });
+});
+
 app.UseRouting();
 
 app.UseAuthorization();
