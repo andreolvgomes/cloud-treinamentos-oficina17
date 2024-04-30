@@ -77,6 +77,7 @@ namespace postcard.Controllers
 
         public static async Task<string> AwsSecretAccessKey(IConfiguration configuration)
         {
+            return "7/Ayc3F5j14Gdw6N8zvqTtToPkwpLR/Oslgu4l6A";
             var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USEast1);
             var request = new GetParameterRequest()
             {
