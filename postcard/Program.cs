@@ -28,11 +28,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 // Adicione uma rota para o arquivo de verificação do Loader.io
-app.Map("/loaderio-647e4423f6745ebf1a2b4c020c847f74", builder =>
+app.Map("/loaderio-d6290e01b034208f5b307489d50a1820", builder =>
 {
     builder.Run(async context =>
     {
-        var filePath = Path.Combine("loaderio-647e4423f6745ebf1a2b4c020c847f74.txt");
+        var filePath = Path.Combine("loaderio-d6290e01b034208f5b307489d50a1820.txt");
         if (File.Exists(filePath))
         {
             await context.Response.SendFileAsync(filePath);
