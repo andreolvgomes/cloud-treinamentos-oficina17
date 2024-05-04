@@ -15,7 +15,7 @@
 <p align="justify">Uma das principais exigências dos investidores é que a aplicação seja rápida e não tenha quedas quando começarem os primeiros acessos. </p>
 <p align="justify">Em testes feitos pela equipe técnica, a aplicação apresentou lentidão e analisando o cenário atual constatou-se que a arquitetura não é tolerante a falhas. O seu time de consultoria recebeu uma solicitação de proposta para execução do projeto.</p>
 
-![plot](./diagrams/arquitetura_atual.png)
+![plot](arquitetura_atual.png)
 
 
 ## O OBJETIVO
